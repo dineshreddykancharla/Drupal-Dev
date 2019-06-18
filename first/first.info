@@ -1,0 +1,6 @@
+name = First
+description = custom module to display list of installed modules
+core = 7.x
+version = 1
+package = Drupal 7 module development
+files[] = first.test
