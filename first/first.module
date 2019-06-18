@@ -1,0 +1,50 @@
+<?php
+
+/**@filesource
+ * module file of first module
+ * 
+ * used to dipslay block of enabled modules
+ */
+
+
+ /**
+  * Implements hook_help
+  */
+function first_help($path,$arg)
+{
+    if($path == 'admin/help#first')
+    {
+        return t('This is help section of first module.');
+    }
+}
+
+/**
+ * Implements hook_block_info
+ *
+ */
+function first_block_info()
+{
+    $blocks['installed_modules_list'] = array(
+        'info' => t('displays list of enabled modules'),
+    );
+
+
+    return $blocks;
+
+}
+
+
+/**
+ * Implements hook_block_view
+ */
+function first_block_view($block_name = '')
+{
+    if($block_name == 'installed_modules_list')
+    {
+        $list = module_list();
+        $theme_args = array('items' => $list,'type' => 'ol');
+        $content = theme('item_list',$theme_args);
+        $block = array('title' => t('enabled modules list'), 'content' => $content);
+        return $block;
+    }
+}
